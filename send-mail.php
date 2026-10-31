@@ -100,6 +100,13 @@ $headers .= "X-Mailer: PHP/" . phpversion();
 // Attempt sending email
 $mail_sent = @mail($recipient_email, $email_subject, $html_body, $headers);
 
+// Plain (non-AJAX) form posts go straight to the thank-you page
+if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'XMLHttpRequest') {
+    $thank_you = 'thank-you.html' . (stripos($source, 'brochure') !== false ? '?download=brochure' : '');
+    header('Location: ' . $thank_you, true, 303);
+    exit;
+}
+
 echo json_encode([
     'status'  => 'success',
     'message' => 'Thank you! Your private consultation request has been received. Our luxury property specialist will contact you shortly.',

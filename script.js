@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 3. Tab Switching (Floor Plans)
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabBtns = document.querySelectorAll('.tab-btn[data-tab]');
   const tabPanes = document.querySelectorAll('.tab-pane');
 
   tabBtns.forEach(btn => {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 4. Modal Controller (Enquiry / Brochure / Pricing)
   const modalOverlay = document.getElementById('enquiryModal');
-  const modalCloseBtn = document.querySelector('.modal-close-btn');
+  const modalCloseBtn = document.querySelector('#enquiryModal .modal-close-btn');
   const modalTitle = document.getElementById('modalTitle');
   const modalSubtitle = document.getElementById('modalSubtitle');
   const modalForm = document.getElementById('modalEnquiryForm');
@@ -123,6 +123,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Global hook for any inline handlers
+  window.openLeadModal = function (source, title, subtitle) {
+    openEnquiryModal(source, title, subtitle);
+  };
 
   // Bind all CTA buttons with data-modal trigger
   document.querySelectorAll('[data-open-modal]').forEach(btn => {
@@ -164,6 +169,13 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.target === lightbox) closeLightbox();
     });
   }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeEnquiryModal();
+    }
+  });
 
   document.querySelectorAll('[data-lightbox]').forEach(item => {
     item.addEventListener('click', function () {
@@ -215,8 +227,13 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
     if (feedbackEl) feedbackEl.style.display = 'none';
 
+    // Thank-you page (brochure requests get the PDF download there)
+    const source = formData.get('source') || '';
+    const thankYouUrl = 'thank-you.html' + (source.toLowerCase().includes('brochure') ? '?download=brochure' : '');
+
     fetch('send-mail.php', {
       method: 'POST',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
       body: formData
     })
       .then(res => res.json())
@@ -225,29 +242,9 @@ document.addEventListener('DOMContentLoaded', function () {
         submitBtn.innerHTML = originalBtnText;
 
         if (data.status === 'success') {
-          showFeedback(feedbackEl, data.message || 'Thank you! Your enquiry has been received.', 'success');
+          sessionStorage.setItem('amore_popup_shown', 'true');
           form.reset();
-
-          // If source was brochure download, trigger download
-          const source = formData.get('source') || '';
-          if (source.toLowerCase().includes('brochure')) {
-            setTimeout(() => {
-              const downloadLink = document.createElement('a');
-              downloadLink.href = 'assets/docs/Pristine_Amore_Brochure.pdf';
-              downloadLink.download = 'Pristine_Amore_Brochure.pdf';
-              document.body.appendChild(downloadLink);
-              downloadLink.click();
-              downloadLink.remove();
-            }, 800);
-          }
-
-          // Auto-close modal after 2.5s if inside modal
-          if (form.closest('.modal-overlay')) {
-            setTimeout(() => {
-              closeEnquiryModal();
-              if (feedbackEl) feedbackEl.style.display = 'none';
-            }, 2500);
-          }
+          window.location.href = thankYouUrl;
         } else {
           showFeedback(feedbackEl, data.message || 'Failed to submit. Please try again.', 'error');
         }
@@ -258,8 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (window.location.protocol === 'file:') {
           showFeedback(feedbackEl, 'Local file preview detected (file://). PHP scripts cannot execute without a web server. Please upload to your PHP hosting server or run via local server to test email dispatch.', 'error');
         } else {
-          showFeedback(feedbackEl, 'Thank you! We have received your request and will contact you shortly.', 'success');
           form.reset();
+          window.location.href = thankYouUrl;
         }
       });
   }
@@ -287,11 +284,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 8. Auto Popup after 20 seconds (once per session)
+  // 8. Auto Popup after 3.5 seconds (once per session)
   if (!sessionStorage.getItem('amore_popup_shown')) {
     setTimeout(() => {
-      openEnquiryModal('Automated VIP Welcome', 'Unlock Exclusive Launch Privileges', 'Get special pre-launch pricing and priority inventory allotment.');
+      const busy = (modalOverlay && modalOverlay.classList.contains('active')) ||
+        (lightbox && lightbox.classList.contains('active'));
+      if (!busy) {
+        openEnquiryModal('Automated VIP Welcome', 'Unlock Exclusive Launch Privileges', 'Get special pre-launch pricing and priority inventory allotment.');
+      }
       sessionStorage.setItem('amore_popup_shown', 'true');
-    }, 20000);
+    }, 3500);
   }
 });

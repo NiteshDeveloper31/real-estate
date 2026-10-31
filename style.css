@@ -341,6 +341,9 @@ h1, h2, h3, h4, .font-serif {
   object-fit: cover;
   display: block;
 }
+.hero-balcony-img {
+  object-position: center 42%;
+}
 
 .hero-media-video {
   width: 100%;
@@ -799,7 +802,7 @@ select.form-control {
   border-radius: var(--radius-md);
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1.1fr;
   align-items: center;
   box-shadow: var(--shadow-sm);
 }
@@ -870,8 +873,20 @@ select.form-control {
   position: relative;
 }
 
+.overview-lead {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--gold-dark);
+  margin-bottom: 14px;
+}
+
 .overview-main-img {
   width: 100%;
+  height: 560px;
+  object-fit: cover;
+  object-position: center 45%;
+  display: block;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-light);
@@ -1485,7 +1500,11 @@ select.form-control {
 
 .video-player-element {
   width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
   max-height: 580px;
+  object-fit: contain;
+  background: #000000;
   display: block;
 }
 
@@ -1903,11 +1922,193 @@ select.form-control {
   color: var(--gold-light);
 }
 
+.footer-rera-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-rera-qr {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: var(--radius-xs);
+  image-rendering: pixelated;
+}
+
+.footer-rera-text h4 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.footer-rera-text p {
+  color: #cbd5e1;
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.footer-rera-text strong {
+  color: var(--gold-light);
+}
+
+.footer-rera-text a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
 .footer-bottom {
   padding-top: 24px;
   text-align: center;
   font-size: 0.78rem;
   line-height: 1.6;
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+.faq-section {
+  padding: 90px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border-light);
+}
+
+.faq-list {
+  max-width: 900px;
+  margin: 36px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+.faq-item[open] {
+  border-color: var(--border-gold);
+}
+
+.faq-question {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 56px 18px 22px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-heading);
+  position: relative;
+}
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--gold-dark);
+  line-height: 1;
+}
+.faq-item[open] .faq-question::after {
+  content: '\2212';
+}
+
+.faq-answer {
+  padding: 0 22px 20px;
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.faq-answer a {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   THANK YOU PAGE
+   ========================================================================== */
+.thankyou-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-alt);
+}
+
+.thankyou-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 70px 0;
+}
+
+.thankyou-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.thankyou-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.35);
+}
+
+.thankyou-title {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.thankyou-text {
+  color: var(--text-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.thankyou-download {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.thankyou-download a {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+.thankyou-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.thankyou-footer {
+  padding: 26px 0;
 }
 
 /* ==========================================================================
@@ -1925,16 +2126,20 @@ select.form-control {
   padding: 20px;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: all var(--transition-smooth);
 }
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .modal-container {
   width: 100%;
   max-width: 500px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
   background: #ffffff;
   border-radius: var(--radius-md);
   padding: 36px 32px;
@@ -1970,11 +2175,13 @@ select.form-control {
   padding: 20px;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: all var(--transition-smooth);
 }
 .image-lightbox.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .lightbox-img {
@@ -2134,7 +2341,78 @@ select.form-control {
 /* ==========================================================================
    RESPONSIVE QUERIES
    ========================================================================== */
+
+/* Desktop: keep the hero (and its enquiry form) within the first screen */
+@media (min-width: 1025px) {
+  .hero-clean-section {
+    padding: 20px 0 36px;
+  }
+  .hero-info-card {
+    position: sticky;
+    top: 86px;
+    padding: 24px 28px;
+  }
+  .hero-location-sub {
+    margin-bottom: 14px;
+  }
+  .hero-feature-box {
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+  .hero-feature-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+  }
+  .hero-feature-item {
+    font-size: 0.86rem;
+    align-items: flex-start;
+    line-height: 1.35;
+  }
+  .hero-price-wrap {
+    margin-bottom: 16px;
+    padding: 10px 0;
+  }
+  .hero-form-title {
+    margin-bottom: 12px;
+  }
+  .hero-info-card .form-group {
+    margin-bottom: 11px;
+  }
+  .hero-info-card .form-control {
+    padding: 11px 14px;
+  }
+  .hero-media-container {
+    height: clamp(320px, calc(100vh - 400px), 470px);
+  }
+}
+
+/* Laptop widths: keep the header on a single row */
+@media (min-width: 769px) and (max-width: 1240px) {
+  .desktop-nav {
+    gap: 14px;
+  }
+  .nav-link {
+    font-size: 0.84rem;
+  }
+  .nav-whatsapp-btn,
+  .nav-phone-btn {
+    padding: 9px 12px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .nav-phone-btn span,
+  .nav-whatsapp-btn span {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
+  .spotlight-img-wrap {
+    order: -1;
+  }
   .hero-clean-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -2288,5 +2566,29 @@ select.form-control {
   .location-action-btn {
     width: 100%;
     justify-content: center;
+  }
+  .overview-main-img {
+    height: 400px;
+  }
+  .footer-rera-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .faq-section {
+    padding: 60px 0;
+  }
+  .faq-question {
+    padding: 16px 48px 16px 16px;
+    font-size: 0.95rem;
+  }
+  .faq-answer {
+    padding: 0 16px 16px;
+  }
+  .thankyou-card {
+    padding: 34px 20px;
+  }
+  .thankyou-actions .btn {
+    width: 100%;
   }
 }

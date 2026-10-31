@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Thank You | Pristine Amore Kalyani Nagar</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo_clean.png?v=3.2">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=3.4">
+</head>
+<body class="thankyou-page">
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo-wrap" aria-label="Pristine Amore Homepage">
+        <img src="assets/images/logo_clean.png?v=3.2" alt="Pristine Amore Logo" class="brand-logo-img">
+      </a>
+      <div class="nav-actions">
+        <a href="tel:+919503334775" class="nav-phone-btn" title="Call Sales Desk">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>9503334775</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="thankyou-section">
+    <div class="container">
+      <div class="thankyou-card">
+        <div class="thankyou-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="section-label">Enquiry Received</span>
+        <h1 class="thankyou-title">Thank You for Your Interest in <span class="text-gold">Pristine Amore</span></h1>
+        <p class="thankyou-text">
+          Your details have been submitted successfully. Our property specialist will contact you shortly with the latest price list, floor plans and available inventory.
+        </p>
+
+        <p class="thankyou-download" id="brochureNote" hidden>
+          Your brochure download should begin automatically.
+          <a href="assets/docs/Pristine_Amore_Brochure.pdf" download="Pristine_Amore_Brochure.pdf" id="brochureLink">Click here if it doesn't.</a>
+        </p>
+
+        <div class="thankyou-actions">
+          <a href="https://wa.me/919503334775?text=Hi,%20I%20just%20enquired%20about%20Pristine%20Amore%20Kalyani%20Nagar.%20Please%20share%20details." target="_blank" rel="noopener" class="btn" style="background: var(--whatsapp-green); color: #fff;">
+            Chat on WhatsApp
+          </a>
+          <a href="tel:+919503334775" class="btn btn-gold">Call +91 95033 34775</a>
+          <a href="index.html" class="btn btn-outline-gold">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer thankyou-footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <p style="margin-bottom: 8px;">Project MahaRERA Registration No.: PR1261012600653 | MahaRERA Agent Registration No.: A041262504420 (Property Pilot Ventures Private Limited) | <a href="https://maharera.maharashtra.gov.in" target="_blank" rel="noopener" style="color: var(--gold-light);">maharera.maharashtra.gov.in</a></p>
+        <p>&copy; 2026 Pristine Amore | Amore by Pristine Developers. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).get('download') !== 'brochure') return;
+      document.getElementById('brochureNote').hidden = false;
+      setTimeout(function () { document.getElementById('brochureLink').click(); }, 800);
+    })();
+  </script>
+</body>
+</html>
