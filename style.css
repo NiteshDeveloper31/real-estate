@@ -797,30 +797,37 @@ select.form-control {
 }
 
 .spotlight-card {
-  background: #ffffff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  box-shadow: var(--shadow-sm);
+  align-items: stretch;
+  gap: 40px;
 }
 
 .spotlight-img-wrap {
   position: relative;
   height: 100%;
   min-height: 420px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
 }
 
 .spotlight-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .spotlight-content {
   padding: 44px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .quote-symbol {
